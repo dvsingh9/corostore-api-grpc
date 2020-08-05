@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package com.codemiro.corostore.catalog;
+option java_multiple_files = true;
+
+message CategoryRequest {
+  string name = 1;
+}
+
+message CategoryResponse {
+  string id = 1;
+  string name = 2;
+  Audit audit = 3;
+}
+
+service CategoryService {
+  rpc save(CategoryRequest) returns (CategoryResponse);
+  rpc getAll(CategoryResponse) returns (stream CategoryResponse);
+}
+
+
+message UUID {
+   bytes value = 1;
+}
+
+message Audit {
+  string createdBy = 1;
+  string updatedBy =2 ;
+  string deleteBy = 3;
+  bool isDelete = 4;
+  //google.protobuf.Timestamp createdOn = 5;
+  //google.protobuf.Timestamp updatedOn = 6;
+
+}
